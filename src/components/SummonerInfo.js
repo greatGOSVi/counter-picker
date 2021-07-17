@@ -109,7 +109,7 @@ const SummonerInfo = (props) => {
                 <input placeholder="Summoner name" className='borderNone' onKeyDown={handleKeyDownInput}></input>
 
                 <button className='searchButton borderNone'>
-                    <img src={searchIcon} style={{maxWidth: "60%", maxHeight: "100%"}}></img>
+                    <img src={searchIcon} style={{maxWidth: "35%", maxHeight: "100%"}}></img>
                 </button>
             </div><br/>
 
