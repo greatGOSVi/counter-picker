@@ -4,6 +4,7 @@ import provisional from '../assets/provisional.png';
 import searchIcon from '../assets/searchIcon.png';
 
 const provisionalPIcon = (min, max) => Math.ceil(Math.random() * (max - min)) + 1;
+const host = "http://localhost:3001";
 
 const SummonerInfo = (props) => {
     const [summRegion, setSummRegion] = useState("la1");
@@ -13,16 +14,16 @@ const SummonerInfo = (props) => {
     const [summPIcon, setSummPIcon] = useState(provisionalPIcon(1, 28));
 
     const [summSoloIcon, setSummSoloIcon] = useState(provisional);
-    const [summSoloTierRank, setSummSoloTierRank] = useState("Rank/Tier");
+    const [summSoloTierRank, setSummSoloTierRank] = useState("Tier/Rank");
     const [summSoloLP, setSummSoloLP] = useState("LP");
     const [summFlexIcon, setSummFlexIcon] = useState(provisional);
-    const [summFlexTierRank, setSummFlexTierRank] = useState("Rank/Tier");
+    const [summFlexTierRank, setSummFlexTierRank] = useState("Tier/Rank");
     const [summFlexLP, setSummFlexLP] = useState("LP");
 
     const fetchSummInfo = async(sumName, region) => {
-        const summInfoResponse = await fetch(`http://localhost:3001/summoner-info?region=${region}&sumName=${sumName}`);
+        const summInfoResponse = await fetch(`${host}/summoner-info?region=${region}&sumName=${sumName}`);
         const summInfo = await summInfoResponse.json();
-        const summLeagueResponse = await fetch(`http://localhost:3001/summoner-league?region=${region}&sumID=${summInfo?.id}`);
+        const summLeagueResponse = await fetch(`${host}/summoner-league?region=${region}&sumID=${summInfo?.id}`);
         const summLeague = await summLeagueResponse.json();
 
         if (summInfo.profileIconId) {
@@ -37,7 +38,10 @@ const SummonerInfo = (props) => {
         
         for (let i=0; i<2; i++) {
             if (summLeague[i]?.queueType === "RANKED_SOLO_5x5") {
-                setSummSoloIcon(`rankedEmblems/${summLeague[i].tier}${summLeague[i].rank}.png`);
+                const leagueSoloImgResponse = await fetch(`${host}/league-img?tierRank=${(summLeague[i].tier).toLowerCase()}${(summLeague[i].rank).toLowerCase()}`);
+                const leagueSoloImg = await leagueSoloImgResponse.json();
+                console.log(leagueSoloImg);
+                setSummSoloIcon(leagueSoloImg);
                 switch (summLeague[i].tier) {
                     case "MASTER":
                     case "GRANDMASTER":
@@ -50,7 +54,10 @@ const SummonerInfo = (props) => {
                 }
                 setSummSoloLP(summLeague[i].leaguePoints);
             } else if (summLeague[i]?.queueType === "RANKED_FLEX_SR") {
-                setSummFlexIcon(`rankedEmblems/${summLeague[i].tier}${summLeague[i].rank}.png`);
+                const leagueFlexImgResponse = await fetch(`${host}/league-img?tierRank=${summLeague[i].tier}${summLeague[i].rank}`);
+                const leagueFlexImg = await leagueFlexImgResponse.json();
+                console.log(leagueFlexImg);
+                setSummFlexIcon(leagueFlexImg);
                 switch (summLeague[i].tier) {
                     case "MASTER":
                     case "GRANDMASTER":
@@ -66,11 +73,18 @@ const SummonerInfo = (props) => {
                 if (summLeague[0]?.queueType === "RANKED_SOLO_5x5") {
                     setSummFlexIcon(provisional);
                     setSummFlexTierRank("UNRANKED");
-                    summFlexLP.innerText = "0 LP";
+                    setSummFlexLP("0 LP");
                 } else if (summLeague[0]?.queueType === "RANKED_FLEX_SR") {
                     setSummSoloIcon(provisional);
                     setSummSoloTierRank("UNRANKED");
                     setSummSoloLP("0 LP");
+                } else {
+                    setSummFlexIcon(provisional);
+                    setSummFlexTierRank("UNRANKED");
+                    setSummFlexLP("---");
+                    setSummSoloIcon(provisional);
+                    setSummSoloTierRank("UNRANKED");
+                    setSummSoloLP("---");
                 }
             }
         }
@@ -83,7 +97,7 @@ const SummonerInfo = (props) => {
         if (evnt.key === "Enter") {
             if (evnt.target.value.length > 2) {
                 setSummName(evnt.target.value);
-                fetchSummInfo(summName, summRegion);
+                fetchSummInfo(evnt.target.value, summRegion);
             }
         }
     }
