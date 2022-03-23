@@ -11,6 +11,7 @@ const ChampionSelector = (props) => {
                 const champsInfoResponse = await fetch(`http://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/champion.json`);
                 const champsInfo = await champsInfoResponse.json();
                 setChampNames(Object.keys(champsInfo.data));
+                setFilteredChampNames(Object.keys(champsInfo.data));
             } catch (error) {
                console.log(error);
             }    
@@ -23,11 +24,15 @@ const ChampionSelector = (props) => {
         <div>
             <br/>
             <div className='bigContainer'>
-                {champNames.map((name) =>
-                    <button>
-                        <img src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/champion/${name}.png`} alt={`${name}`}/>
-                    </button>
-                )}
+                <div className='selectionBoxContainer'>
+                    <div className='selectionBox'>
+                        {filteredChampNames.map((name) =>
+                        <button className='selectionChamp'>
+                            <img src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/champion/${name}.png`} alt={`${name}`} className='champImg'/>
+                        </button>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );
