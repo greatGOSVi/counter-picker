@@ -15,6 +15,7 @@ import rankedGrandMasterIcon from '../assets/rankedEmblems/grandMaster.png';
 import rankedChallengerIcon from '../assets/rankedEmblems/challenger.png';
 
 const provisionalSummIcon = (min, max) => Math.ceil(Math.random() * (max - min)) + 1;
+const host = "http://localhost:3001";
 
 const SummonerInfo = (props) => {
     const [summRegion, setSummRegion] = useState("la1");
@@ -24,16 +25,16 @@ const SummonerInfo = (props) => {
     const [summPIcon, setSummPIcon] = useState(provisionalSummIcon(1, 28));
 
     const [summSoloIcon, setSummSoloIcon] = useState(rankedProvisionalIcon);
-    const [summSoloTierRank, setSummSoloTierRank] = useState("Rank/Tier");
+    const [summSoloTierRank, setSummSoloTierRank] = useState("Tier/Rank");
     const [summSoloLP, setSummSoloLP] = useState("LP");
     const [summFlexIcon, setSummFlexIcon] = useState(rankedProvisionalIcon);
-    const [summFlexTierRank, setSummFlexTierRank] = useState("Rank/Tier");
+    const [summFlexTierRank, setSummFlexTierRank] = useState("Tier/Rank");
     const [summFlexLP, setSummFlexLP] = useState("LP");
 
     const fetchSummInfo = async(sumName, region) => {
-        const summInfoResponse = await fetch(`http://localhost:3001/summoner-info?region=${region}&sumName=${sumName}`);
+        const summInfoResponse = await fetch(`${host}/summoner-info?region=${region}&sumName=${sumName}`);
         const summInfo = await summInfoResponse.json();
-        const summLeagueResponse = await fetch(`http://localhost:3001/summoner-league?region=${region}&sumID=${summInfo?.id}`);
+        const summLeagueResponse = await fetch(`${host}/summoner-league?region=${region}&sumID=${summInfo?.id}`);
         const summLeague = await summLeagueResponse.json();
 
         if (summInfo.profileIconId) {
