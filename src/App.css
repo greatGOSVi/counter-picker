@@ -1,3 +1,7 @@
+body {
+  background-color: #343644;
+}
+
 .borderNone {
   border: none;
   background-color: #ffffff;
@@ -27,8 +31,8 @@
   border: 0px solid #000000;
   border-radius: 32px;
   margin-left: 10%;
-  color: #ffffff;
-  background-color: #414554;
+  color: #000000;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
   align-items: center;

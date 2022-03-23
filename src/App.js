@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import SummonerInfo from './components/SummonerInfo';
+import SummonerInfo from './components/SummonerInfo.js';
+import ChampionSelector from './components/championSelector/ChampionSelector.js';
 
 function App() {
   const [gameVersion, setGameVersion] = useState(0);
@@ -17,6 +18,7 @@ function App() {
   return (
     <div>
       {gameVersion !== 0 && <SummonerInfo version={gameVersion}/>}
+      {gameVersion !== 0 && <ChampionSelector version={gameVersion}/>}
     </div>
   );
 }

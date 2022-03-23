@@ -1,0 +1,12 @@
+.bigContainer {
+    max-width: 80%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-radius: 32px;
+    background-color: #414554;
+    /* box-shadow: 5px 10px 10px #808080; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+  }

@@ -1,21 +1,32 @@
 import { useState } from 'react';
 import '../App.css';
-import provisional from '../assets/provisional.png';
+
 import searchIcon from '../assets/searchIcon.png';
 
-const provisionalPIcon = (min, max) => Math.ceil(Math.random() * (max - min)) + 1;
+import rankedProvisionalIcon from '../assets/rankedEmblems/provisional.png';
+import rankedIronIcon from '../assets/rankedEmblems/iron.png';
+import rankedBronzeIcon from '../assets/rankedEmblems/bronze.png';
+import rankedSilverIcon from '../assets/rankedEmblems/silver.png';
+import rankedGoldIcon from '../assets/rankedEmblems/gold.png';
+import rankedPlatinumIcon from '../assets/rankedEmblems/platinum.png';
+import rankedDiamondIcon from '../assets/rankedEmblems/diamond.png';
+import rankedMasterIcon from '../assets/rankedEmblems/master.png';
+import rankedGrandMasterIcon from '../assets/rankedEmblems/grandMaster.png';
+import rankedChallengerIcon from '../assets/rankedEmblems/challenger.png';
+
+const provisionalSummIcon = (min, max) => Math.ceil(Math.random() * (max - min)) + 1;
 
 const SummonerInfo = (props) => {
     const [summRegion, setSummRegion] = useState("la1");
     const [summName, setSummName] = useState("Summoner");
 
     const [summLvl, setSummLvl] = useState("Lvl");
-    const [summPIcon, setSummPIcon] = useState(provisionalPIcon(1, 28));
+    const [summPIcon, setSummPIcon] = useState(provisionalSummIcon(1, 28));
 
-    const [summSoloIcon, setSummSoloIcon] = useState(provisional);
+    const [summSoloIcon, setSummSoloIcon] = useState(rankedProvisionalIcon);
     const [summSoloTierRank, setSummSoloTierRank] = useState("Rank/Tier");
     const [summSoloLP, setSummSoloLP] = useState("LP");
-    const [summFlexIcon, setSummFlexIcon] = useState(provisional);
+    const [summFlexIcon, setSummFlexIcon] = useState(rankedProvisionalIcon);
     const [summFlexTierRank, setSummFlexTierRank] = useState("Rank/Tier");
     const [summFlexLP, setSummFlexLP] = useState("LP");
 
@@ -26,64 +37,91 @@ const SummonerInfo = (props) => {
         const summLeague = await summLeagueResponse.json();
 
         if (summInfo.profileIconId) {
-            setSummLvl(summInfo?.summonerLevel);
             setSummPIcon(summInfo?.profileIconId);
             setSummName(summInfo?.name);
+            setSummLvl(summInfo?.summonerLevel);
         } else {
-            setSummLvl("Lvl");
-            setSummPIcon(provisionalPIcon(1, 28));
+            setSummPIcon(provisionalSummIcon(1, 28));
             setSummName("NOT-FOUND");
+            setSummLvl("Lvl");
         }
         
         for (let i=0; i<2; i++) {
             if (summLeague[i]?.queueType === "RANKED_SOLO_5x5") {
-                setSummSoloIcon(`rankedEmblems/${summLeague[i].tier}${summLeague[i].rank}.png`);
-                switch (summLeague[i].tier) {
-                    case "MASTER":
-                    case "GRANDMASTER":
-                    case "CHALLENGER":
-                        setSummSoloTierRank(`${summLeague[i].tier}`);
-                        break;
-                    default:
-                        setSummSoloTierRank(`${summLeague[i].tier} ${summLeague[i].rank}`);
-                        break;
-                }
-                setSummSoloLP(summLeague[i].leaguePoints);
+                setSummLeagueInfo(setSummSoloIcon, setSummSoloTierRank, setSummSoloLP, summLeague[i]);
             } else if (summLeague[i]?.queueType === "RANKED_FLEX_SR") {
-                setSummFlexIcon(`rankedEmblems/${summLeague[i].tier}${summLeague[i].rank}.png`);
-                switch (summLeague[i].tier) {
-                    case "MASTER":
-                    case "GRANDMASTER":
-                    case "CHALLENGER":
-                        setSummFlexTierRank(`${summLeague[i].tier}`);
-                        break;
-                    default:
-                        setSummFlexTierRank(`${summLeague[i].tier} ${summLeague[i].rank}`);
-                        break;
-                }
-                setSummFlexLP(summLeague[i].leaguePoints);
+                setSummLeagueInfo(setSummFlexIcon, setSummFlexTierRank, setSummFlexLP, summLeague[i]);
             } else {
                 if (summLeague[0]?.queueType === "RANKED_SOLO_5x5") {
-                    setSummFlexIcon(provisional);
+                    setSummFlexIcon(rankedProvisionalIcon);
                     setSummFlexTierRank("UNRANKED");
-                    summFlexLP.innerText = "0 LP";
+                    setSummFlexLP("---");
                 } else if (summLeague[0]?.queueType === "RANKED_FLEX_SR") {
-                    setSummSoloIcon(provisional);
+                    setSummSoloIcon(rankedProvisionalIcon);
                     setSummSoloTierRank("UNRANKED");
-                    setSummSoloLP("0 LP");
+                    setSummSoloLP("---");
+                } else {
+                    setSummSoloIcon(rankedProvisionalIcon);
+                    setSummSoloTierRank("UNRANKED");
+                    setSummSoloLP("---");
+                    setSummFlexIcon(rankedProvisionalIcon);
+                    setSummFlexTierRank("UNRANKED");
+                    setSummFlexLP("---");
+                    break;
                 }
             }
         }
     }
 
+    const setSummLeagueInfo = (queueIcon, queueTierRank, queueLP, leagueInfo) => {
+        switch (leagueInfo.tier) {
+            case "IRON":
+                queueIcon(rankedIronIcon);
+                break;
+            case "BRONZE":
+                queueIcon(rankedBronzeIcon);
+                break;
+            case "SILVER":
+                queueIcon(rankedSilverIcon);
+                break;
+            case "GOLD":
+                queueIcon(rankedGoldIcon);
+                break;
+            case "PLATINUM":
+                queueIcon(rankedPlatinumIcon);
+                break;
+            case "DIAMOND":
+                queueIcon(rankedDiamondIcon);
+                break;
+            case "MASTER":
+                queueIcon(rankedMasterIcon);
+                break;
+            case "GRANDMASTER":
+                queueIcon(rankedGrandMasterIcon);
+                break;
+            case "CHALLENGER":
+                queueIcon(rankedChallengerIcon);
+                break;
+            default:
+                queueIcon(rankedProvisionalIcon);
+                break;
+        }
+
+        if (leagueInfo.tier === "MASTER" || leagueInfo.tier === "GRANDMASTER" || leagueInfo.tier === "CHALLENGER") {
+            queueTierRank(`${leagueInfo.tier}`);
+        } else {
+            queueTierRank(`${leagueInfo.tier} ${leagueInfo.rank}`);
+        }
+
+        queueLP(leagueInfo.leaguePoints);
+    }
     const handleChangeRegion = (evnt) => {
         setSummRegion(evnt.target.value);
     }
     const handleKeyDownInput = (evnt) => {
         if (evnt.key === "Enter") {
             if (evnt.target.value.length > 2) {
-                setSummName(evnt.target.value);
-                fetchSummInfo(summName, summRegion);
+                fetchSummInfo(evnt.target.value, summRegion);
             }
         }
     }
@@ -109,27 +147,27 @@ const SummonerInfo = (props) => {
                 <input placeholder="Summoner name" className='borderNone' onKeyDown={handleKeyDownInput}></input>
 
                 <button className='searchButton borderNone'>
-                    <img src={searchIcon} style={{maxWidth: "35%", maxHeight: "100%"}}></img>
+                    <img src={searchIcon} alt="Search button" style={{maxWidth: "35%", maxHeight: "100%"}}></img>
                 </button>
             </div><br/>
 
             <div className="summonerInfoContainer">
                 <div className="infoContainers">
                     <div id="summLvl">{summLvl}</div>
-                    <img className="summPIcon" src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/profileicon/${summPIcon}.png`}></img><br/>
+                    <img className="summPIcon" src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/profileicon/${summPIcon}.png`} alt="Summoner Icon"></img><br/>
                     <div id="summName">{summName}</div>
                 </div>
 
                 <div className="infoContainers">
                     <div>Solo/Duo</div>
-                    <img className="summLIcon" src={summSoloIcon}></img>
+                    <img className="summLIcon" src={summSoloIcon} alt="Summoner Solo-Ranked Icon"></img>
                     <div id="summSoloTierRank">{summSoloTierRank}</div>
                     <div id="summSoloLP">{summSoloLP}</div>
                 </div>
 
                 <div className="infoContainers">
                     <div>Flex</div>
-                    <img className="summLIcon" src={summFlexIcon}></img>
+                    <img className="summLIcon" src={summFlexIcon} alt="Summoner Flex-Ranked Icon"></img>
                     <div id="summFlexTierRank">{summFlexTierRank}</div>
                     <div id="summFlexLP">{summFlexLP}</div>
                 </div>
