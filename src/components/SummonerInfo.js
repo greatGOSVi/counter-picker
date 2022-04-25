@@ -37,7 +37,10 @@ const SummonerInfo = (props) => {
         const summLeagueResponse = await fetch(`${host}/summoner-league?region=${region}&sumID=${summInfo?.id}`);
         const summLeague = await summLeagueResponse.json();
 
-        if (summInfo.profileIconId) {
+        props.setPuuid(`${summInfo?.puuid}`);
+        props.setSummName(summInfo?.name);
+
+        if (summInfo?.profileIconId) {
             setSummPIcon(summInfo?.profileIconId);
             setSummName(summInfo?.name);
             setSummLvl(summInfo?.summonerLevel);
@@ -122,6 +125,26 @@ const SummonerInfo = (props) => {
     const handleKeyDownInput = (evnt) => {
         if (evnt.key === "Enter") {
             if (evnt.target.value.length > 2) {
+                switch (summRegion) {
+                    case "na":
+                    case "la1":
+                    case "la2":
+                    case "br1":
+                    case "oc1":
+                        props.setRegionZone("americas");
+                        break;
+                    case "euw1":
+                    case "eun1":
+                    case "ru":
+                    case "tr1":
+                        props.setRegionZone("europe");
+                        break;
+                    case "kr":
+                    case "jp1":
+                        props.setRegionZone("asia");
+                        break;
+                };
+
                 fetchSummInfo(evnt.target.value, summRegion);
             }
         }

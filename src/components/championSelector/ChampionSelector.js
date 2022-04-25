@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import '../../components/championSelector/ChampionSelector.css';
+
+import './ChampionSelector.css';
 
 const ChampionSelector = (props) => {
     const [champNames, setChampNames] = useState([]);
@@ -26,9 +27,10 @@ const ChampionSelector = (props) => {
             <div className='bigContainer'>
                 <div className='selectionBoxContainer'>
                     <div className='selectionBox'>
-                        {filteredChampNames.map((name) =>
+                        {filteredChampNames.map((champName) =>
                         <button className='selectionChamp'>
-                            <img src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/champion/${name}.png`} alt={`${name}`} className='champImg'/>
+                            <img src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/champion/${champName}.png`}
+                             alt={`${champName}`} className='champImg'/>
                         </button>
                         )}
                     </div>

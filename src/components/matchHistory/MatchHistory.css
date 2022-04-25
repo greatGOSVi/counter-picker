@@ -1,0 +1,32 @@
+.bigContainer {
+  max-width: 80%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  border-radius: 32px;
+  background-color: #414554;
+  /* box-shadow: 5px 10px 10px #808080; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: auto;
+}
+.matchDisplayBox {
+  max-width: 100%;
+  border-radius: 32px;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+.matchDisplayRow {
+  width: 98%;
+  height: 100px;
+  max-height: 100px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-radius: 20px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+}
