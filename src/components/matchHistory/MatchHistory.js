@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './MatchHistory.css';
 import MatchList from './MatchList.js';
@@ -6,53 +6,55 @@ import MatchList from './MatchList.js';
 const MatchHistory = (props) => {
     const [matchType, setMatchType] = useState("");
     const [count, setCount] = useState(20);
-    let matchList;
+    const [matchIdList, setMatchIdList] = useState([]);
+    const [matchesInfo, setMatchesInfo] = useState([]);
     const host = "http://localhost:3001";
+    console.log(matchesInfo);
 
-    const fetchMatchList = async() => {
+    useEffect(() => {
+        const getData = async () => {
+            await fetchMatchIdList();
+        }
+        getData();
+
+    }, [props.summName]);
+    useEffect(() => {
+        fetchMatchesInfo();
+    }, [matchIdList])
+
+    const fetchMatchIdList = async() => {
         try {
-            const matchListResponse = await fetch(
+            const matchIdListResponse = await fetch(
                 `${host}/match-list?region=${props.region}&puuid=${props.puuid}&matchType=${matchType}&count=${count}`);
-            matchList = await matchListResponse.json();
+            setMatchIdList(await matchIdListResponse.json());
         } catch (error) {
             console.log(error);
         }
     }
 
-    /*const createMatchList = async() => {
-        let matchInfo;
-
-        for (let i=0; i < count; i++) {
+    const fetchMatchesInfo = async() => {
+        const mInfo = [];
+        console.log(matchIdList.length);
+        for (let i=0; i < matchIdList.lenght; i++) {
             try {
-                const matchInfoResponse = await fetch(`${host}/match-info?region=${props.region}&matchId=${matchList[i]}`);
-                matchInfo = await matchInfoResponse.json();
+                const matchInfoResponse = await fetch(`${host}/match-info?region=${props.region}&matchId=${matchIdList[i]}`);
+                const asd = await matchInfoResponse.json();
+                mInfo.push(asd);
+
+                console.log(asd);
             } catch (error) {
                 console.log(error);
             }
-
-            createMatchDisplayRow(matchInfo);
         }
+        setMatchesInfo(mInfo);
     }
-
-    const createMatchDisplayRow = (matchInfo) => {
-        for (let i=0; i < matchInfo?.info.participants.length; i++) {
-            if (matchInfo?.info.participants[i].summonerName === props.summName) {
-                console.log('si entro');
-                return (
-                    <div>
-                        {i}, {matchInfo?.info.participants[i].summonerName}, {props.summName}
-                    </div>
-                );
-            }
-        }
-    }*/
 
     return(
         <div>
             <br/>
             <div className='bigContainer'>
                 <div className='matchDisplayBox'>
-                    {<MatchList region={props.region} summName={props.summName} matchList={matchList} count={count}/>}
+                    <MatchList summName={props.summName} matchList={matchesInfo}/>
                 </div>
             </div>
         </div>
