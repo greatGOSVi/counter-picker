@@ -8,19 +8,33 @@ const MatchHistory = (props) => {
     const [count, setCount] = useState(20);
     const [matchIdList, setMatchIdList] = useState([]);
     const [matchesInfo, setMatchesInfo] = useState([]);
+    const [summSpellsInfo, setSummSpellsInfo] = useState({});
     const host = "http://localhost:3001";
-    console.log(matchesInfo);
+    console.log(props.summName, matchesInfo);
 
     useEffect(() => {
-        const getData = async () => {
-            await fetchMatchIdList();
+        fetchSummSpellsInfo();
+    }, []);
+    useEffect(() => {
+        if(props.summName) {
+            fetchMatchIdList();   
         }
-        getData();
-
     }, [props.summName]);
     useEffect(() => {
-        fetchMatchesInfo();
-    }, [matchIdList])
+        if (matchIdList.length !== 0 && Object.keys(summSpellsInfo).length !== 0) {
+            fetchMatchesInfo();
+        }
+    }, [matchIdList]);
+
+    const fetchSummSpellsInfo = async() => {
+        try {
+            const summSpellsInfoResponse = await fetch(`http://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/summoner.json`);
+            setSummSpellsInfo(await summSpellsInfoResponse.json());
+            console.log(summSpellsInfo);
+        } catch (error) {
+            console.log(error); 
+        }
+    }
 
     const fetchMatchIdList = async() => {
         try {
@@ -34,14 +48,10 @@ const MatchHistory = (props) => {
 
     const fetchMatchesInfo = async() => {
         const mInfo = [];
-        console.log(matchIdList.length);
-        for (let i=0; i < matchIdList.lenght; i++) {
+        for (let i=0; i < matchIdList.length; i++) {
             try {
                 const matchInfoResponse = await fetch(`${host}/match-info?region=${props.region}&matchId=${matchIdList[i]}`);
-                const asd = await matchInfoResponse.json();
-                mInfo.push(asd);
-
-                console.log(asd);
+                mInfo.push(await matchInfoResponse.json());
             } catch (error) {
                 console.log(error);
             }
@@ -53,8 +63,11 @@ const MatchHistory = (props) => {
         <div>
             <br/>
             <div className='bigContainer'>
-                <div className='matchDisplayBox'>
-                    <MatchList summName={props.summName} matchList={matchesInfo}/>
+                <div className='displayBoxContainer'>
+                    <div className='matchDisplayBox'>
+                        {matchesInfo.length !== 0 &&
+                         <MatchList version={props.version} summName={props.summName} matchesInfo={matchesInfo} summSpellsInfo={summSpellsInfo}/>}
+                    </div>
                 </div>
             </div>
         </div>

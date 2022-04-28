@@ -24,7 +24,6 @@ function App() {
       {gameVersion !== 0 && <SummonerInfo version={gameVersion} setRegionZone={setRegionZone} setPuuid={setPuuid} setSummName={setSummName}/>}
       {gameVersion !== 0 && <ChampionSelector version={gameVersion}/>}
       {puuid !== "" && <MathcHistory version={gameVersion} region={regionZone} puuid={puuid} summName={summName}/>}
-      {gameVersion !== 0 && <div>{regionZone}, {puuid}, {summName}</div>}
     </div>
   );
 }

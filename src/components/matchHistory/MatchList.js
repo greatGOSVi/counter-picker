@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import MatchRow from './MatchRow.js';
+import './MatchHistory.css';
 
-const MatchList = (props) => {
+const MatchList = ({matchesInfo, summName, version, summSpellsInfo}) => {
 
     return (
-        <div>
-
-        </div>
+        matchesInfo.map(matchInfo => {
+            return(
+                <MatchRow matchInfo={matchInfo} summName={summName} version={version} summSpellsInfo={summSpellsInfo} key={matchInfo.metadata.matchId}/>
+            );
+        })  
     );
 }
 
