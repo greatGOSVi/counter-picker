@@ -1,3 +1,20 @@
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background-color: gray;
+  box-shadow: inset 0 0 5px gray;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: #343644;
+  border: 0px solid gray;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #585a60;
+}
+
 .bigContainer {
   max-width: 80%;
   padding-top: 25px;
@@ -27,27 +44,52 @@
   align-items: center;
   margin: auto;
 }
-.matchDisplayRowWin {
+.matchRow {
+  color: #e0e0e0;
+  position: relative;
   width: 98%;
   height: 100px;
   max-height: 100px;
   margin-top: 8px;
   margin-bottom: 8px;
   border-radius: 20px;
-  background-color: #90EE90;
+  background-color: #343644;
   display: flex;
   align-items: center;
+  border-left: 8px solid #1A94DE;
 }
-.matchDisplayRowLose {
+.matchRowLose {
+  color: #e0e0e0;
+  position: relative;
   width: 98%;
   height: 100px;
   max-height: 100px;
   margin-top: 8px;
   margin-bottom: 8px;
   border-radius: 20px;
-  background-color: #F27573;
+  background-color: #343644;
   display: flex;
   align-items: center;
+  border-left: 8px solid #DE3132;
+}
+
+.matchWin {
+  position: absolute;
+  left: 0;
+  height: 92%;
+  width: 1%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  background-color: #1A94DE;
+}
+.matchLose {
+  position: absolute;
+  left: 0;
+  height: 92%;
+  width: 1%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  background-color: #DE3132;
 }
 
 .matchGameInfo {
@@ -67,11 +109,29 @@
   justify-content: center;
   align-items: center;
 }
+.matchChampImgContainer {
+  position: relative;
+  width: 60%;
+  max-height: 100%;
+}
 .matchChampImg {
-  width: 55%;
+  max-width: 100%;
   max-height: 100%;
   border-radius: 50%;
   overflow: hidden;
+}
+.matchChampLvl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #414554;
+  font-size: small;
+  width: 30%;
+  height: 30%;
+  bottom: 0;
+  right: 0;
 }
 
 .matchSummSpellsInfo {
@@ -102,11 +162,15 @@
   border-radius: 8px;
 }
 .matchNoItem {
-  width: 12.2%;
-  height: 62px;
-  border: 1px solid #000000;
+  width: 12.5%;
+  max-height: 64%;
   border-radius: 8px;
-  background-color: #d3d3d3;
+  overflow: hidden;
+}
+.noItem {
+  width: 64px;
+  height: 64px;
+  background-color: #414554;
 }
 
 .matchScoreInfo {

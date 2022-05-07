@@ -5,7 +5,7 @@ import './MatchHistory.css';
 const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
     const summMatchInfo = matchInfo.info.participants.find(participant => participant.summonerName === summName);
     console.log(summMatchInfo);
-    const matchRowStyle = summMatchInfo.win ? 'matchDisplayRowWin' : 'matchDisplayRowLose';
+    const matchWinLoseStyle = summMatchInfo.win ? 'matchRow' : 'matchRowLose';
 
     let gameMode = '';
     switch(matchInfo?.info.gameMode) {
@@ -71,14 +71,17 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
     const cs = `${summMatchInfo.totalMinionsKilled + summMatchInfo.neutralMinionsKilled}`;
 
     return(
-        <div className={matchRowStyle}>
+        <div className={matchWinLoseStyle}>
             <div className='matchGameInfo'>
                 <strong>{gameMode}</strong>
                 <div>{gameDurationMins}m {gameDurationSegs}s</div>
             </div>
             <div className='matchChampInfo'>
-                <img className='matchChampImg' src={champImgSrc}/>
-                <div>Lv. {summMatchInfo.champLevel}</div>
+                <div className='matchChampImgContainer'>
+                    <img className='matchChampImg' src={champImgSrc}/>
+                    <div className='matchChampLvl'>{summMatchInfo.champLevel}</div>
+                </div>
+                
                 <strong>{summMatchInfo.championName}</strong>
             </div>
             <div className='matchSummSpellsInfo'>
@@ -88,7 +91,9 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
             <div className='matchItemsInfo'>
                 {itemsArr.map(item => {
                     if (summMatchInfo[item] === 0) {
-                        return(<div className='matchNoItem' />);
+                        return(<div className='matchNoItem'>
+                            <div className='noItem'/>
+                        </div>);
                     } else if (item === 'item6') {
                         return(<img className='matchItem' src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${summMatchInfo[item]}.png`}/>);
                     } else {

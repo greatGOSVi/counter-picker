@@ -70,6 +70,7 @@ const MatchHistory = (props) => {
                     </div>
                 </div>
             </div>
+            <br/>
         </div>
     );
 }
