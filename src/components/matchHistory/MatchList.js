@@ -1,12 +1,12 @@
 import MatchRow from './MatchRow.js';
 import './MatchHistory.css';
 
-const MatchList = ({matchesInfo, summName, version, summSpellsInfo}) => {
+const MatchList = ({matchesInfo, summName, version, runesInfo, summSpellsInfo}) => {
 
     return (
         matchesInfo.map(matchInfo => {
             return(
-                <MatchRow matchInfo={matchInfo} summName={summName} version={version} summSpellsInfo={summSpellsInfo} key={matchInfo.metadata.matchId}/>
+                <MatchRow matchInfo={matchInfo} summName={summName} version={version} runesInfo={runesInfo} summSpellsInfo={summSpellsInfo} key={matchInfo.metadata.matchId}/>
             );
         })  
     );

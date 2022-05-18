@@ -20,7 +20,7 @@
 }
 .selectionBox {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   justify-content: space-around;
 }
 .selectionRow {
@@ -35,9 +35,14 @@
   justify-content: space-around;
 }
 .selectionChamp {
+  background: none;
   width: 75px;
   height: 100%;
-  padding: 0;
+  padding: 0em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-left: .1em;
+  margin-right: .3em;
   border: none;
 }
 .champImg {

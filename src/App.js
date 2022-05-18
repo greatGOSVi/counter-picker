@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import SummonerInfo from './components/SummonerInfo.js';
+import SummonerInfo from './components/userInfo/SummonerInfo.js';
 import ChampionSelector from './components/championSelector/ChampionSelector.js';
 import MathcHistory from './components/matchHistory/MatchHistory.js';
 
@@ -21,6 +21,7 @@ function App() {
 
   return (
     <div>
+      <br/>
       {gameVersion !== 0 && <SummonerInfo version={gameVersion} setRegionZone={setRegionZone} setPuuid={setPuuid} setSummName={setSummName}/>}
       {gameVersion !== 0 && <ChampionSelector version={gameVersion}/>}
       {puuid !== "" && <MathcHistory version={gameVersion} region={regionZone} puuid={puuid} summName={summName}/>}

@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import '../App.css';
+import './usersInfo.css';
+import BasicSummonerStats from './BasicSummonerStats';
 
-import searchIcon from '../assets/searchIcon.png';
-
-import rankedProvisionalIcon from '../assets/rankedEmblems/provisional.png';
-import rankedIronIcon from '../assets/rankedEmblems/iron.png';
-import rankedBronzeIcon from '../assets/rankedEmblems/bronze.png';
-import rankedSilverIcon from '../assets/rankedEmblems/silver.png';
-import rankedGoldIcon from '../assets/rankedEmblems/gold.png';
-import rankedPlatinumIcon from '../assets/rankedEmblems/platinum.png';
-import rankedDiamondIcon from '../assets/rankedEmblems/diamond.png';
-import rankedMasterIcon from '../assets/rankedEmblems/master.png';
-import rankedGrandMasterIcon from '../assets/rankedEmblems/grandMaster.png';
-import rankedChallengerIcon from '../assets/rankedEmblems/challenger.png';
+import searchIcon from '../../assets/searchIcon.png';
+import rankedProvisionalIcon from '../../assets/rankedEmblems/provisional.png';
+import rankedIronIcon from '../../assets/rankedEmblems/iron.png';
+import rankedBronzeIcon from '../../assets/rankedEmblems/bronze.png';
+import rankedSilverIcon from '../../assets/rankedEmblems/silver.png';
+import rankedGoldIcon from '../../assets/rankedEmblems/gold.png';
+import rankedPlatinumIcon from '../../assets/rankedEmblems/platinum.png';
+import rankedDiamondIcon from '../../assets/rankedEmblems/diamond.png';
+import rankedMasterIcon from '../../assets/rankedEmblems/master.png';
+import rankedGrandMasterIcon from '../../assets/rankedEmblems/grandMaster.png';
+import rankedChallengerIcon from '../../assets/rankedEmblems/challenger.png';
 
 const provisionalSummIcon = (min, max) => Math.ceil(Math.random() * (max - min)) + 1;
 const host = "http://localhost:3001";
@@ -152,7 +152,6 @@ const SummonerInfo = (props) => {
 
     return (
         <div>
-            <br/>
             <div className='summonerSearchContainer'>
                 <select id="summRegion" className="borderNone" defaultValue="la1" onChange={handleChangeRegion}>
                     <option value="na">NA</option>
@@ -175,28 +174,31 @@ const SummonerInfo = (props) => {
                 </button>
             </div><br/>
 
-            <div className="summonerInfoContainer">
-                <div className="infoContainers">
-                    <div id="summLvl">{summLvl}</div>
-                    <img className="summPIcon" src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/profileicon/${summPIcon}.png`} alt="Summoner Icon"></img><br/>
-                    <div id="summName">{summName}</div>
-                </div>
+            <div className='infoStatsContainer'>
+                <div className="summonerInfoContainer">
+                    <div className="infoContainers">
+                        <div id="summLvl">{summLvl}</div>
+                        <img className="summPIcon" src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/profileicon/${summPIcon}.png`} alt="Summoner Icon"></img><br/>
+                        <strong id="summName">{summName}</strong>
+                    </div>
 
-                <div className="infoContainers">
-                    <div>Solo/Duo</div>
-                    <img className="summLIcon" src={summSoloIcon} alt="Summoner Solo-Ranked Icon"></img>
-                    <div id="summSoloTierRank">{summSoloTierRank}</div>
-                    <div id="summSoloLP">{summSoloLP}</div>
-                </div>
+                    <div className="infoContainers">
+                        <div>Solo/Duo</div>
+                        <img className="summLIcon" src={summSoloIcon} alt="Summoner Solo-Ranked Icon"></img>
+                        <div id="summSoloTierRank">{summSoloTierRank}</div>
+                        <div id="summSoloLP">{summSoloLP}</div>
+                    </div>
 
-                <div className="infoContainers">
-                    <div>Flex</div>
-                    <img className="summLIcon" src={summFlexIcon} alt="Summoner Flex-Ranked Icon"></img>
-                    <div id="summFlexTierRank">{summFlexTierRank}</div>
-                    <div id="summFlexLP">{summFlexLP}</div>
+                    <div className="infoContainers">
+                        <div>Flex</div>
+                        <img className="summLIcon" src={summFlexIcon} alt="Summoner Flex-Ranked Icon"></img>
+                        <div id="summFlexTierRank">{summFlexTierRank}</div>
+                        <div id="summFlexLP">{summFlexLP}</div>
+                    </div>
                 </div>
+                <BasicSummonerStats/>
             </div>
-
+            <br/>
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
 import './MatchHistory.css';
+import csIcon from '../../assets/csIcon.png';
 
-const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
+const MatchRow = ({matchInfo, summName, version, runesInfo, summSpellsInfo}) => {
     const summMatchInfo = matchInfo.info.participants.find(participant => participant.summonerName === summName);
     console.log(summMatchInfo);
     const matchWinLoseStyle = summMatchInfo.win ? 'matchRow' : 'matchRowLose';
@@ -54,6 +55,20 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
 
     const champImgSrc = `http://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${summMatchInfo.championName}.png`;
 
+    let primaryRunesIcon = "";
+    let secondaryRunesIcon = "";
+    for (let i=0; i < runesInfo.length; i ++) {
+        if (runesInfo[i].id === summMatchInfo.perks.styles[0].style) {
+            for (let j=0; j < runesInfo[i].slots[0].runes.length; j++) {
+                if (runesInfo[i].slots[0].runes[j].id === summMatchInfo.perks.styles[0].selections[0].perk) {
+                    primaryRunesIcon = `https://ddragon.canisback.com/img/${runesInfo[i].slots[0].runes[j].icon}`;
+                }
+            }
+        } else if (runesInfo[i].id === summMatchInfo.perks.styles[1].style) {
+            secondaryRunesIcon = `https://ddragon.canisback.com/img/${runesInfo[i].icon}`;
+        }
+    }
+
     const summSpellsInfoKeys = Object.keys(summSpellsInfo.data);
     let summSpell1Src;
     let summSpell2Src;
@@ -72,10 +87,12 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
 
     return(
         <div className={matchWinLoseStyle}>
+
             <div className='matchGameInfo'>
                 <strong>{gameMode}</strong>
                 <div>{gameDurationMins}m {gameDurationSegs}s</div>
             </div>
+
             <div className='matchChampInfo'>
                 <div className='matchChampImgContainer'>
                     <img className='matchChampImg' src={champImgSrc}/>
@@ -84,10 +101,17 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
                 
                 <strong>{summMatchInfo.championName}</strong>
             </div>
+
+            <div className='runesInfo'>
+                <img className='primaryRuneImg' src={primaryRunesIcon}/>
+                <img className='secondaryRuneImg' src={secondaryRunesIcon}/>
+            </div>
+
             <div className='matchSummSpellsInfo'>
                 <img className='matchSummSpellsImg' src={summSpell1Src}/>
                 <img className='matchSummSpellsImg' src={summSpell2Src}/>
             </div>
+
             <div className='matchItemsInfo'>
                 {itemsArr.map(item => {
                     if (summMatchInfo[item] === 0) {
@@ -101,10 +125,12 @@ const MatchRow = ({matchInfo, summName, version, summSpellsInfo}) => {
                     }
                 })}
             </div>
+
             <div className='matchScoreInfo'>
                 <strong>{kda}</strong>
-                <div>{cs} cs</div>
+                <div className='csScore'>{cs} <img src={csIcon} className='csIcon'/></div>
             </div>
+
         </div>
     );
 }

@@ -23,7 +23,6 @@ const ChampionSelector = (props) => {
 
     return(
         <div>
-            <br/>
             <div className='bigContainer'>
                 <div className='selectionBoxContainer'>
                     <div className='selectionBox'>
@@ -36,6 +35,7 @@ const ChampionSelector = (props) => {
                     </div>
                 </div>
             </div>
+            <br/>
         </div>
     );
 }
