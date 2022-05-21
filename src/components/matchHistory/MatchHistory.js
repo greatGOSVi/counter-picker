@@ -21,7 +21,7 @@ const MatchHistory = (props) => {
     }, []);
     useEffect(() => {
         if(props.summName) {
-            fetchMatchIdList();   
+            fetchMatchIdList();
         }
     }, [props.summName]);
     useEffect(() => {

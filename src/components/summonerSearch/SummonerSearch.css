@@ -1,0 +1,20 @@
+.summonerSearchContainer {
+    width: 20%;
+    padding: 6px;
+    border: 1px solid #000000;
+    border-radius: 32px;
+    margin-left: 11%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+}
+.borderNone {
+    border: none;
+    background-color: #ffffff;
+}
+.searchButton {
+    padding: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

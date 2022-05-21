@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import SummonerSearch from './components/summonerSearch/SummonerSearch.js';
 import SummonerInfo from './components/userInfo/SummonerInfo.js';
 import ChampionSelector from './components/championSelector/ChampionSelector.js';
 import MathcHistory from './components/matchHistory/MatchHistory.js';
@@ -16,13 +17,17 @@ function App() {
     fetchGameVersion();
   }, [])
   const [regionZone, setRegionZone] = useState("americas");
+  const [summInfo, setSummInfo] = useState({});
+  const [summLeaguesInfo, setSummLeaguesInfo] = useState([]);
   const [puuid, setPuuid] = useState("");
   const [summName, setSummName] = useState("");
 
   return (
     <div>
       <br/>
-      {gameVersion !== 0 && <SummonerInfo version={gameVersion} setRegionZone={setRegionZone} setPuuid={setPuuid} setSummName={setSummName}/>}
+      <SummonerSearch setRegionZone={setRegionZone} setSummInfo={setSummInfo} setSummLeaguesInfo={setSummLeaguesInfo}/>
+      {gameVersion !== 0 && Object.keys(summInfo).length !== 0 && <SummonerInfo
+       version={gameVersion} summInfo={summInfo}  summLeaguesInfo={summLeaguesInfo} setPuuid={setPuuid} setSummName={setSummName}/>}
       {gameVersion !== 0 && <ChampionSelector version={gameVersion}/>}
       {puuid !== "" && <MathcHistory version={gameVersion} region={regionZone} puuid={puuid} summName={summName}/>}
     </div>
