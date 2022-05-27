@@ -4,13 +4,22 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
-    padding-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 2em;
 }
 
 .infoContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
+
+.footerLink {
+    font-size: larger;
+    text-decoration: none;
+    color: #1f75fe;
+}
+.footerLink:hover {
+    color: #ffd700;
+    transition: 200ms ease-in;
+  }
