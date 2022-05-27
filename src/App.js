@@ -4,6 +4,7 @@ import SummonerSearch from './components/summonerSearch/SummonerSearch.js';
 import SummonerInfo from './components/userInfo/SummonerInfo.js';
 import ChampionSelector from './components/championSelector/ChampionSelector.js';
 import MathcHistory from './components/matchHistory/MatchHistory.js';
+import Footer from './components/footer/Footer.js';
 
 function App() {
   const [gameVersion, setGameVersion] = useState(0);
@@ -30,6 +31,8 @@ function App() {
        version={gameVersion} summInfo={summInfo}  summLeaguesInfo={summLeaguesInfo} setPuuid={setPuuid} setSummName={setSummName}/>}
       {gameVersion !== 0 && <ChampionSelector version={gameVersion}/>}
       {puuid !== "" && <MathcHistory version={gameVersion} region={regionZone} puuid={puuid} summName={summName}/>}
+      <br/>
+      <Footer/>
     </div>
   );
 }
