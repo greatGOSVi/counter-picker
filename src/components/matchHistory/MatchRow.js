@@ -115,9 +115,7 @@ const MatchRow = ({matchInfo, summName, version, runesInfo, summSpellsInfo}) => 
             <div className='matchItemsInfo'>
                 {itemsArr.map(item => {
                     if (summMatchInfo[item] === 0) {
-                        return(<div className='matchNoItem'>
-                            <div className='noItem'/>
-                        </div>);
+                        return(<div className='noItem'/>);
                     } else if (item === 'item6') {
                         return(<img className='matchItem' src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${summMatchInfo[item]}.png`}/>);
                     } else {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import './ChampionSelector.css';
+import ChampionSearch from '../championSearch/ChampionSearch.js';
 
 const ChampionSelector = (props) => {
     const [champNames, setChampNames] = useState([]);
@@ -19,11 +20,12 @@ const ChampionSelector = (props) => {
         };
 
         getChampsInfo();
-    }, [])
+    }, []);
 
     return(
         <div>
-            <div className='bigContainer'>
+            <div className='container'>
+                <ChampionSearch/>
                 <div className='selectionBoxContainer'>
                     <div className='selectionBox'>
                         {filteredChampNames.map((champName) =>

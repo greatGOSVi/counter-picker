@@ -21,7 +21,6 @@
   padding-bottom: 25px;
   border-radius: 32px;
   background-color: #414554;
-  /* box-shadow: 5px 10px 10px #808080; */
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -160,15 +159,11 @@
   height: 64%;
   border-radius: 8px;
 }
-.matchNoItem {
+.noItem {
   width: 12.5%;
-  max-height: 64%;
+  height: 64px;
   border-radius: 8px;
   overflow: hidden;
-}
-.noItem {
-  width: 64px;
-  height: 64px;
   background-color: #414554;
 }
 

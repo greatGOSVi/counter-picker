@@ -59,16 +59,18 @@ const MatchHistory = (props) => {
     }
 
     const fetchMatchesInfo = async() => {
-        const mInfo = [];
-        for (let i=0; i < matchIdList.length; i++) {
-            try {
-                const matchInfoResponse = await fetch(`${host}/match-info?region=${props.region}&matchId=${matchIdList[i]}`);
-                mInfo.push(await matchInfoResponse.json());
-            } catch (error) {
-                console.log(error);
+        const promises = matchIdList.map(id => fetch(`${host}/match-info?region=${props.region}&matchId=${id}`));
+        try {
+            const responses = await Promise.all(promises);
+            const matches = [];
+
+            for (let i=0; i < responses.length; i++) {
+                matches.push(await responses[i].json());
             }
+            setMatchesInfo(matches);
+        } catch (error) {
+            console.log(error);
         }
-        setMatchesInfo(mInfo);
     }
 
     return(

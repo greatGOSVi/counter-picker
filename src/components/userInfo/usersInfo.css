@@ -1,22 +1,21 @@
 .infoStatsContainer {
-    width: 100%;
+    width: 80vw;
     height: 300px;
+    margin-left: 10vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .summonerInfoContainer {
-    width: 42%;
+    width: 50%;
     height: 300px;
     border-radius: 32px;
-    /* margin-left: 10%; */
     color: #ffffff;
     background-color: #414554;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    /* box-shadow: 5px 10px 10px #808080; */
 }
 .infoContainers {
     width: 21%;
@@ -28,13 +27,13 @@
     justify-content: center;
 }
 .summPIcon {
-    width: 70%;
+    width: 85%;
     height: 50%;
     border-radius: 50%;
     overflow: hidden;
 }
 .summLIcon {
-    width: 70%;
+    width: 90%;
     height: 50%;
     border: none;
     border-radius: 0%;
@@ -42,10 +41,9 @@
 }
 
 .summonerStatsContainer {
-    width: 34%;
+    width: 40%;
     height: 300px;
     border-radius: 32px;
-    margin-right: 10%;
     color: #ffffff;
     background-color: #414554;
     display: flex;

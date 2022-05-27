@@ -1,8 +1,8 @@
-.summonerSearchContainer {
-    width: 20%;
+.championSearchContainer {
+    width: 20vw;
     padding: 6px;
+    margin-bottom: 2vh;
     border-radius: 32px;
-    margin-left: 11%;
     background-color: #ffffff;
     display: flex;
     justify-content: space-around;
