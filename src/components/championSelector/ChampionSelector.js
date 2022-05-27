@@ -25,7 +25,7 @@ const ChampionSelector = (props) => {
     return(
         <div>
             <div className='container'>
-                <ChampionSearch/>
+                <ChampionSearch champNames={champNames} setFilteredChampNames={setFilteredChampNames}/>
                 <div className='selectionBoxContainer'>
                     <div className='selectionBox'>
                         {filteredChampNames.map((champName) =>

@@ -2,10 +2,16 @@ import './ChampionSearch.css';
 
 import searchIcon from '../../assets/searchIcon.png';
 
-const ChampionSearch = (props) => {
+const ChampionSearch = ({champNames, setFilteredChampNames}) => {
 
-    const handleKeyUpInput = () => {
-        
+    const handleKeyUpInput = (evnt) => {
+        if (evnt.target.value === "") {
+            setFilteredChampNames(champNames);
+        } else {
+            setFilteredChampNames(champNames.filter(name => 
+                name.toLowerCase().includes(evnt.target.value.toLowerCase().replace(/\s+/g, ''))
+            ));
+        }
     }
 
     return (
