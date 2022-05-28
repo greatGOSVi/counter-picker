@@ -40,6 +40,8 @@
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 0.8em;
   align-items: center;
   margin: auto;
 }
@@ -49,8 +51,6 @@
   width: 98%;
   height: 100px;
   max-height: 100px;
-  margin-top: 8px;
-  margin-bottom: 8px;
   border-radius: 20px;
   background-color: #343644;
   display: flex;
@@ -63,8 +63,6 @@
   width: 98%;
   height: 100px;
   max-height: 100px;
-  margin-top: 8px;
-  margin-bottom: 8px;
   border-radius: 20px;
   background-color: #343644;
   display: flex;

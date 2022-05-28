@@ -19,7 +19,7 @@ const ChampionSearch = ({champNames, setFilteredChampNames}) => {
             <input placeholder='Champion name' className='borderNone' onKeyUp={handleKeyUpInput}></input>
 
             <button className='searchButton borderNone'>
-                <img src={searchIcon} alt='Search button' style={{maxWidth: '35%', maxHeight: '100%'}}></img>
+                <img src={searchIcon} alt='Search button' style={{maxWidth: '35%', maxHeight: '100%'}} />
             </button>
         </div>
     );

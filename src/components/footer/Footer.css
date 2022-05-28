@@ -3,15 +3,25 @@
     color: #ffffff;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-top: 0.5em;
+    padding-right: 7em;
     padding-bottom: 2em;
+    font-size: small;
 }
 
 .infoContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.rammusOkIcon {
+    height: 150px;
+    width: 205px;
+    margin-left: 3em;
+    margin-bottom: -2em;
+    align-self: flex-end;
 }
 
 .footerLink {
