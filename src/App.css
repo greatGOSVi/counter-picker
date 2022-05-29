@@ -1,5 +1,6 @@
 body {
   background-color: #343644;
+  min-height: 73vh;
 }
 
 input::placeholder{

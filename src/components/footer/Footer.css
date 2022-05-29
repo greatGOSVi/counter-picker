@@ -3,9 +3,11 @@
     color: #ffffff;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    column-gap: 6em;
     padding-top: 0.5em;
     padding-right: 7em;
+    padding-left: 7em;
     padding-bottom: 2em;
     font-size: small;
 }
@@ -13,23 +15,22 @@
 .infoContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items:flex-start;
 }
 
 .rammusOkIcon {
     height: 150px;
     width: 205px;
-    margin-left: 3em;
     margin-bottom: -2em;
     align-self: flex-end;
 }
 
 .footerLink {
-    font-size: larger;
     text-decoration: none;
-    color: #1f75fe;
+    color: #ffffff;
 }
 .footerLink:hover {
-    color: #ffd700;
+    color: #1f75fe;
     transition: 200ms ease-in;
   }
