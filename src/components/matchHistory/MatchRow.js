@@ -249,7 +249,13 @@ const MatchRow = ({
             />
           );
         })}
-        <ReactTooltip className='tooltip' html={true} multiline={true} />
+        <ReactTooltip
+          className='tooltip'
+          delayHide='800'
+          effect='solid'
+          html={true}
+          multiline={true}
+        />
       </div>
 
       <div className='matchScoreInfo'>

@@ -7,7 +7,7 @@ const MatchHistory = (props) => {
   //const [matchType, setMatchType] = useState('');
   const matchType = '';
   //const [count, setCount] = useState(20);
-  const count = 20;
+  const count = 10;
   const [matchIdList, setMatchIdList] = useState([]);
   const [matchesInfo, setMatchesInfo] = useState([]);
   const [itemsInfo, setItemsInfo] = useState({});
