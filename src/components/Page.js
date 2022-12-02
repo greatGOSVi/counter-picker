@@ -3,9 +3,13 @@ import Footer from './footer/Footer.js';
 const Page = ({ title, children }) => {
   return (
     <div>
-      <header>
+      <head>
         <title>{title}</title>
-      </header>
+        <meta
+          httpEquiv='Content-Security-Policy'
+          content='upgrade-insecure-requests'
+        ></meta>
+      </head>
 
       <body>{children}</body>
 
