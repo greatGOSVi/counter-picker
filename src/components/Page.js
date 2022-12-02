@@ -1,4 +1,4 @@
-import Footer from "./footer/Footer.js";
+import Footer from './footer/Footer.js';
 
 const Page = ({ title, children }) => {
   return (

@@ -18,3 +18,7 @@ input::placeholder{
   justify-content: center;
   align-items: center;
 }
+
+.summSearch {
+  margin-left: 11%;
+}

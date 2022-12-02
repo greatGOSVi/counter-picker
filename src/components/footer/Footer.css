@@ -1,36 +1,36 @@
 .footerContainer {
-    background-color: #414554;
-    color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    column-gap: 6em;
-    padding-top: 0.5em;
-    padding-right: 7em;
-    padding-left: 7em;
-    padding-bottom: 2em;
-    font-size: small;
+  background-color: #414554;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 6em;
+  padding-top: 0.5em;
+  padding-right: 7em;
+  padding-left: 7em;
+  padding-bottom: 2em;
+  font-size: small;
 }
 
 .infoContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
 }
 
 .rammusOkIcon {
-    height: 150px;
-    width: 205px;
-    margin-bottom: -2em;
-    align-self: flex-end;
+  height: 150px;
+  width: 205px;
+  margin-bottom: -2em;
+  align-self: flex-end;
 }
 
 .footerLink {
-    text-decoration: none;
-    color: #ffffff;
+  text-decoration: none;
+  color: #ffffff;
 }
 .footerLink:hover {
-    color: #1f75fe;
-    transition: 200ms ease-in;
-  }
+  color: #1f75fe;
+  transition: 200ms ease-in;
+}

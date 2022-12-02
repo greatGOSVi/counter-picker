@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import "./ChampionSelector.css";
-import ChampionSearch from "../championSearch/ChampionSearch.js";
+import './ChampionSelector.css';
+import ChampionSearch from '../championSearch/ChampionSearch.js';
+import ChampionButton from './ChampionButton';
 
-const ChampionSelector = (props) => {
+const ChampionSelector = ({ version }) => {
   const [champNames, setChampNames] = useState([]);
   const [filteredChampNames, setFilteredChampNames] = useState([]);
 
@@ -11,7 +12,7 @@ const ChampionSelector = (props) => {
     const getChampsInfo = async () => {
       try {
         const champsInfoResponse = await fetch(
-          `http://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/champion.json`
+          `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`
         );
         const champsInfo = await champsInfoResponse.json();
         setChampNames(Object.keys(champsInfo.data));
@@ -22,26 +23,26 @@ const ChampionSelector = (props) => {
     };
 
     getChampsInfo();
-  }, []);
+  }, [version]);
 
   return (
     <div>
-      <div className="container">
+      <div className='container'>
         <ChampionSearch
           champNames={champNames}
           setFilteredChampNames={setFilteredChampNames}
         />
-        <div className="selectionBoxContainer">
-          <div className="selectionBox">
-            {filteredChampNames.map((champName) => (
-              <button className="selectionChamp">
-                <img
-                  src={`http://ddragon.leagueoflegends.com/cdn/${props.version}/img/champion/${champName}.png`}
-                  alt={`${champName}`}
-                  className="champImg"
+        <div className='selectionBoxContainer'>
+          <div className='selectionBox'>
+            {filteredChampNames.map((champName) => {
+              return (
+                <ChampionButton
+                  champName={champName}
+                  key={champName}
+                  version={version}
                 />
-              </button>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
