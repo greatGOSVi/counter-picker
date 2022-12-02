@@ -7,7 +7,7 @@ import SummonerInfo from '../../components/SummonerInfo/SummonerInfo';
 import ChampionSelector from '../../components/championSelector/ChampionSelector';
 import MathcHistory from '../../components/matchHistory/MatchHistory';
 
-const host = 'http://localhost:3001/';
+const host = 'https://counter-picker-backend.vercel.app/';
 const api = 'api/v1/';
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

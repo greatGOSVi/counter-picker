@@ -13,7 +13,7 @@ const MatchHistory = (props) => {
   const [itemsInfo, setItemsInfo] = useState({});
   const [runesInfo, setRunesInfo] = useState({});
   const [summSpellsInfo, setSummSpellsInfo] = useState({});
-  const host = 'http://localhost:3001';
+  const host = 'https://counter-picker-backend.vercel.app';
   if (matchesInfo.length !== 0) console.log(props.summName, matchesInfo);
 
   useEffect(() => {

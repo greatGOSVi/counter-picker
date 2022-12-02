@@ -11,7 +11,7 @@ const MatchRow = ({
   summSpellsInfo,
   version,
 }) => {
-  const summMatchInfo = matchInfo.info.participants.find(
+  const summMatchInfo = matchInfo?.info?.participants.find(
     (participant) => participant.summonerName === summName
   );
   if (!summMatchInfo) return null;
