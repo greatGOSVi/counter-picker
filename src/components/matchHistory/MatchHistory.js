@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import './MatchHistory.css';
 import MatchList from './MatchList';
 
-const MatchHistory = (props) => {
+const MatchHistory = ({ puuid, region, summName, version }) => {
   //const [matchType, setMatchType] = useState('');
   const matchType = '';
   //const [count, setCount] = useState(20);
@@ -13,8 +13,9 @@ const MatchHistory = (props) => {
   const [itemsInfo, setItemsInfo] = useState({});
   const [runesInfo, setRunesInfo] = useState({});
   const [summSpellsInfo, setSummSpellsInfo] = useState({});
-  const host = 'https://counter-picker-backend.vercel.app';
-  if (matchesInfo.length !== 0) console.log(props.summName, matchesInfo);
+  const host = 'http://localhost:3002/';
+  const api = 'api/v1/';
+  if (matchesInfo.length !== 0) console.log(summName, matchesInfo);
 
   useEffect(() => {
     fetchItemsInfo();
@@ -24,12 +25,12 @@ const MatchHistory = (props) => {
   useEffect(() => {
     setMatchIdList([]);
     setMatchesInfo([]);
-  }, [props.summName]);
+  }, [summName]);
   useEffect(() => {
-    if (props.puuid) {
+    if (puuid) {
       fetchMatchIdList();
     }
-  }, [props.puuid]);
+  }, [puuid]);
   useEffect(() => {
     if (matchIdList.length !== 0 && Object.keys(summSpellsInfo).length !== 0) {
       fetchMatchesInfo();
@@ -39,7 +40,7 @@ const MatchHistory = (props) => {
   const fetchItemsInfo = async () => {
     try {
       const itemsInfoResponse = await fetch(
-        `http://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/item.json`
+        `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/item.json`
       );
       setItemsInfo(await itemsInfoResponse.json());
     } catch (error) {
@@ -50,7 +51,7 @@ const MatchHistory = (props) => {
   const fetchRunesInfo = async () => {
     try {
       const runesInfoResponse = await fetch(
-        `https://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/runesReforged.json`
+        `https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`
       );
       setRunesInfo(await runesInfoResponse.json());
     } catch (error) {
@@ -61,7 +62,7 @@ const MatchHistory = (props) => {
   const fetchSummSpellsInfo = async () => {
     try {
       const summSpellsInfoResponse = await fetch(
-        `http://ddragon.leagueoflegends.com/cdn/${props.version}/data/en_US/summoner.json`
+        `http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/summoner.json`
       );
       setSummSpellsInfo(await summSpellsInfoResponse.json());
     } catch (error) {
@@ -72,7 +73,7 @@ const MatchHistory = (props) => {
   const fetchMatchIdList = async () => {
     try {
       const matchIdListResponse = await fetch(
-        `${host}/match-list?region=${props.region}&puuid=${props.puuid}&matchType=${matchType}&count=${count}`
+        `${host}${api}match/list?region=${region}&puuid=${puuid}&matchType=${matchType}&count=${count}`
       );
       setMatchIdList(await matchIdListResponse.json());
     } catch (error) {
@@ -83,7 +84,7 @@ const MatchHistory = (props) => {
   const fetchMatchesInfo = async () => {
     if (matchIdList?.length > 0) {
       const promises = matchIdList.map((id) =>
-        fetch(`${host}/match-info?region=${props.region}&matchId=${id}`)
+        fetch(`${host}${api}match/info?region=${region}&matchId=${id}`)
       );
       try {
         const responses = await Promise.all(promises);
@@ -109,9 +110,9 @@ const MatchHistory = (props) => {
                 itemsInfo={itemsInfo}
                 matchesInfo={matchesInfo}
                 runesInfo={runesInfo}
-                summName={props.summName}
+                summName={summName}
                 summSpellsInfo={summSpellsInfo}
-                version={props.version}
+                version={version}
               />
             )}
           </div>

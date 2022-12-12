@@ -1,76 +1,75 @@
 .infoStatsContainer {
-    width: 80%;
-    height: 300px;
-    margin-left: 10vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 80%;
+  height: 300px;
+  margin-left: 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .summonerInfoContainer {
-    width: 50%;
-    height: 300px;
-    border-radius: 32px;
-    color: #ffffff;
-    background-color: #414554;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  width: 50%;
+  height: 300px;
+  border-radius: 32px;
+  color: #ffffff;
+  background-color: #414554;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .infoContainers {
-    width: 21%;
-    height: 75%;
-    border: 0px solid #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 21%;
+  height: 75%;
+  border: 0px solid #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .summPIcon {
-    width: 85%;
-    height: 50%;
-    border-radius: 50%;
-    overflow: hidden;
+  height: 50%;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .summLIcon {
-    width: 90%;
-    height: 50%;
-    border: none;
-    border-radius: 0%;
-    overflow: hidden;
+  width: 90%;
+  height: 50%;
+  border: none;
+  border-radius: 0%;
+  overflow: hidden;
 }
 
 .summonerStatsContainer {
-    width: 40%;
-    height: 300px;
-    border-radius: 32px;
-    color: #ffffff;
-    background-color: #414554;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  width: 40%;
+  height: 300px;
+  border-radius: 32px;
+  color: #ffffff;
+  background-color: #414554;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .winsLosesContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 .champIcon {
-    border-radius: 50%;
-    overflow: hidden;
-    margin-top: 0.5em;
-    height: 5em;
-    width: 5em;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 0.5em;
+  height: 5em;
+  width: 5em;
 }
 .roleIcon {
-    margin-top: 0.5em;
-    height: 4em;
-    width: 4em;
+  margin-top: 0.5em;
+  height: 4em;
+  width: 4em;
 }

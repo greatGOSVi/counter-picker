@@ -7,7 +7,7 @@ import SummonerInfo from '../../components/SummonerInfo/SummonerInfo';
 import ChampionSelector from '../../components/championSelector/ChampionSelector';
 import MathcHistory from '../../components/matchHistory/MatchHistory';
 
-const host = 'https://counter-picker-backend.vercel.app/';
+const host = 'http://localhost:3002/';
 const api = 'api/v1/';
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -36,11 +36,11 @@ const ProfilePage = () => {
 
   const fetchSummInfo = async (sumName, region) => {
     const summInfoResponse = await fetch(
-      `${host}summoner-info?region=${region}&sumName=${sumName}`
+      `${host}${api}summoner/info?region=${region}&sumName=${sumName}`
     );
     const summInfo = await summInfoResponse.json();
     const summLeaguesInfoResponse = await fetch(
-      `${host}summoner-league?region=${region}&sumID=${summInfo?.id}`
+      `${host}${api}summoner/league?region=${region}&sumID=${summInfo?.id}`
     );
     setSummLeaguesInfo(await summLeaguesInfoResponse.json());
     setSummInfo(summInfo);
@@ -50,23 +50,20 @@ const ProfilePage = () => {
 
     // -----------------------------------------------------------------------------
 
-    if (summInfo.name) {
+    if (summInfo?.name) {
       if (summInfo.name.length > 2) {
         try {
-          const summDbInfoResponse = await fetch(
-            `${host}${api}summoner/by-name?region=${region}&summonerName=${summInfo.name}`
-          );
+          const body = { summonerName: summInfo.name, region };
+          const summDbInfoResponse = await fetch(`${host}${api}summoner/`, {
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+          });
 
           const summDbInfo = await summDbInfoResponse.json();
           console.log(summDbInfo);
         } catch (error) {
-          const newSummData = { region: region, summonerName: summInfo.name };
-
-          await fetch(`${host}${api}summoner/new`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newSummData),
-          });
+          console.error(error);
         }
       }
     }

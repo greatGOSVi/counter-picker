@@ -4,7 +4,7 @@ const BasicSummonerStats = () => {
   return (
     <div className='summonerStatsContainer'>
       <div className='info'>
-        <strong>Winrate</strong>%
+        <strong>Win rate</strong>%
         <div className='winsLosesContainer'>
           <div>
             <div>Wins</div>
