@@ -7,8 +7,14 @@ import SummonerInfo from '../../components/SummonerInfo/SummonerInfo';
 import ChampionSelector from '../../components/championSelector/ChampionSelector';
 import MathcHistory from '../../components/matchHistory/MatchHistory';
 
-const host = 'http://localhost:3002/';
-const api = 'api/v1/';
+/* // --- For development ---
+  const host = 'http://localhost:3002/';
+  const api = 'api/v1/';
+  const NEED_FIX_urlSpliter = '/'; */
+// --- For production ---
+const host = 'https://counter-picker-backend.vercel.app/';
+const api = '';
+const NEED_FIX_urlSpliter = '-';
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
@@ -36,11 +42,11 @@ const ProfilePage = () => {
 
   const fetchSummInfo = async (sumName, region) => {
     const summInfoResponse = await fetch(
-      `${host}${api}summoner/info?region=${region}&sumName=${sumName}`
+      `${host}${api}summoner${NEED_FIX_urlSpliter}info?region=${region}&sumName=${sumName}`
     );
     const summInfo = await summInfoResponse.json();
     const summLeaguesInfoResponse = await fetch(
-      `${host}${api}summoner/league?region=${region}&sumID=${summInfo?.id}`
+      `${host}${api}summoner${NEED_FIX_urlSpliter}league?region=${region}&sumID=${summInfo?.id}`
     );
     setSummLeaguesInfo(await summLeaguesInfoResponse.json());
     setSummInfo(summInfo);

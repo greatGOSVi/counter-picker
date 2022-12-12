@@ -13,8 +13,14 @@ const MatchHistory = ({ puuid, region, summName, version }) => {
   const [itemsInfo, setItemsInfo] = useState({});
   const [runesInfo, setRunesInfo] = useState({});
   const [summSpellsInfo, setSummSpellsInfo] = useState({});
+  /* // --- For development ---
   const host = 'http://localhost:3002/';
   const api = 'api/v1/';
+  const NEED_FIX_urlSpliter = '/'; */
+  // --- For production ---
+  const host = 'https://counter-picker-backend.vercel.app/';
+  const api = '';
+  const NEED_FIX_urlSpliter = '-';
   if (matchesInfo.length !== 0) console.log(summName, matchesInfo);
 
   useEffect(() => {
@@ -73,7 +79,7 @@ const MatchHistory = ({ puuid, region, summName, version }) => {
   const fetchMatchIdList = async () => {
     try {
       const matchIdListResponse = await fetch(
-        `${host}${api}match/list?region=${region}&puuid=${puuid}&matchType=${matchType}&count=${count}`
+        `${host}${api}match${NEED_FIX_urlSpliter}list?region=${region}&puuid=${puuid}&matchType=${matchType}&count=${count}`
       );
       setMatchIdList(await matchIdListResponse.json());
     } catch (error) {
@@ -84,7 +90,9 @@ const MatchHistory = ({ puuid, region, summName, version }) => {
   const fetchMatchesInfo = async () => {
     if (matchIdList?.length > 0) {
       const promises = matchIdList.map((id) =>
-        fetch(`${host}${api}match/info?region=${region}&matchId=${id}`)
+        fetch(
+          `${host}${api}match${NEED_FIX_urlSpliter}info?region=${region}&matchId=${id}`
+        )
       );
       try {
         const responses = await Promise.all(promises);
